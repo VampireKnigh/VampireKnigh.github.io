@@ -3,14 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yd&#39;s blog</title>
+  <title>css绘制三角形原理及各种几何图形实现 | yd&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="yd's blog">
-<meta property="og:url" content="http://VampireKnigh.github.io/index.html">
+  <meta name="description" content="在写网页的过程,必不可免的会碰到网站需要装饰一些几何图形;实现的方式无非四种:   图片  CSS2.1&amp;amp;3  SVG  Canvas  就我个人而言,对于一些常见的几何图形.   图片是不推荐的[太占资源,也不利于维护]  CSS是比较推荐的,精简且方便维护  SVG也是一个很好的选择[学习成本高一点点]  Canvas看情况使用  下面展示一些简单css几何图形的绘制 ##css三角形">
+<meta name="keywords" content="css积累">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css绘制三角形原理及各种几何图形实现">
+<meta property="og:url" content="http://VampireKnigh.github.io/2017/04/19/css绘制三角形原理/index.html">
 <meta property="og:site_name" content="yd's blog">
+<meta property="og:description" content="在写网页的过程,必不可免的会碰到网站需要装饰一些几何图形;实现的方式无非四种:   图片  CSS2.1&amp;amp;3  SVG  Canvas  就我个人而言,对于一些常见的几何图形.   图片是不推荐的[太占资源,也不利于维护]  CSS是比较推荐的,精简且方便维护  SVG也是一个很好的选择[学习成本高一点点]  Canvas看情况使用  下面展示一些简单css几何图形的绘制 ##css三角形">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3822720-649f2aad74d5f579.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3822720-04df13526f01b7ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3822720-d9dcd64745bd3db8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3822720-42d28819f5c9a494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3822720-d6e79cd8a7f62ebd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3822720-37d7fbd9bfd09fcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-19T12:56:05.997Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yd's blog">
+<meta name="twitter:title" content="css绘制三角形原理及各种几何图形实现">
+<meta name="twitter:description" content="在写网页的过程,必不可免的会碰到网站需要装饰一些几何图形;实现的方式无非四种:   图片  CSS2.1&amp;amp;3  SVG  Canvas  就我个人而言,对于一些常见的几何图形.   图片是不推荐的[太占资源,也不利于维护]  CSS是比较推荐的,精简且方便维护  SVG也是一个很好的选择[学习成本高一点点]  Canvas看情况使用  下面展示一些简单css几何图形的绘制 ##css三角形">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3822720-649f2aad74d5f579.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternate" href="/atom.xml" title="yd&#39;s blog" type="application/atom+xml">
   
@@ -59,9 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-css绘制三角形原理" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-css绘制三角形原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/19/css绘制三角形原理/" class="article-date">
   <time datetime="2017-04-19T11:31:31.000Z" itemprop="datePublished">2017-04-19</time>
@@ -74,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/19/css绘制三角形原理/">css绘制三角形原理及各种几何图形实现</a>
+    <h1 class="article-title" itemprop="name">
+      css绘制三角形原理及各种几何图形实现
     </h1>
   
 
@@ -123,98 +133,23 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-div+css积累" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/18/div+css积累/" class="article-date">
-  <time datetime="2017-04-18T08:24:47.000Z" itemprop="datePublished">2017-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2017/04/18/div+css积累/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/div+css积累/">div+css小积累</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="文字位于div底部"><a href="#文字位于div底部" class="headerlink" title="文字位于div底部"></a>文字位于div底部</h2><p>css对文字的布局上没有靠容器底部对齐的参数，目前使用的一个不错的方法就是用position属性来解决，<br>absolute定位相对于遇到父元素定位为relative或absolute来进行定位，故需要对其父元素进行定位position:relative;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line">		<span class="selector-class">.container</span>&#123;</div><div class="line">			<span class="attribute">width</span>: <span class="number">50%</span>;</div><div class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">			<span class="attribute">margin</span>:<span class="number">20px</span> <span class="number">10%</span>;</div><div class="line">			<span class="attribute">border</span>:<span class="number">1px</span> solid;</div><div class="line">			<span class="attribute">position</span>: relative;</div><div class="line">		&#125;</div><div class="line">		<span class="selector-class">.bottom</span>&#123;</div><div class="line">			<span class="attribute">margin</span>:<span class="number">0</span>;</div><div class="line">			<span class="attribute">position</span>: absolute;</div><div class="line">			<span class="attribute">bottom</span>: <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"bottom"</span>&gt;</span>this p is on the bottom of div<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="段落首字母大写和缩进"><a href="#段落首字母大写和缩进" class="headerlink" title="段落首字母大写和缩进"></a>段落首字母大写和缩进</h2><p>css对于段落的一些属性如下：</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">text-transform</span>:none;<span class="comment">//无转化样式属性</span></div><div class="line"><span class="attribute">text-transform</span>:capitalize;<span class="comment">//每个英文单词首字母大写，其余无变化</span></div><div class="line"><span class="attribute">text-transform</span>:uppercase;<span class="comment">//全部字母转换成大写</span></div><div class="line"><span class="attribute">text-transform</span>:lowercase;<span class="comment">//全部字母转换成小写</span></div><div class="line"></div><div class="line"><span class="attribute">text-indent</span></div></pre></td></tr></table></figure>
-<p>对于段落首字母字体风格大写或者加大字体或加粗的处理可以考虑使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">&lt;style&gt;</div><div class="line">p&#123;</div><div class="line">	width:150px;</div><div class="line">	color:#000;</div><div class="line">	font-size:1em;</div><div class="line">&#125;</div><div class="line">p:first-letter&#123;</div><div class="line">	font-size:2.5em;</div><div class="line">	padding-right:5px; </div><div class="line">	text-transform:uppercase;</div><div class="line">&#125;</div><div class="line">p:first-line&#123; </div><div class="line">	color:#f00;</div><div class="line">&#125; </div><div class="line">&lt;/style&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">	&lt;p&gt;first paragraph first paragraph first paragraph first paragraph first paragraph first paragraph&lt;/p&gt;</div><div class="line">	&lt;p&gt;段落文字段落文字段落文字&lt;/p&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="常用的font-family属性"><a href="#常用的font-family属性" class="headerlink" title="常用的font-family属性"></a>常用的font-family属性</h2><p>宋体    SimSun<br>黑体    SimHei<br>微软雅黑    Microsoft YaHei<br>微软正黑体    Microsoft JhengHei<br>新宋体    NSimSun<br>新细明体    PMingLiU<br>细明体    MingLiU<br>标楷体    DFKai-SB<br>仿宋    FangSong<br>楷体    KaiTi<br>仿宋_GB2312    FangSong_GB2312<br>楷体_GB2312    KaiTi_GB2312</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/18/div+css积累/" data-id="cj1ozfjze0001zgo01jgx4m6q" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css积累/">css积累</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/18/hello-world/" class="article-date">
-  <time datetime="2017-04-18T03:07:03.109Z" itemprop="datePublished">2017-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          div+css小积累
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/hello-world/">Hello World</a>
-    </h1>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/18/hello-world/" data-id="cj1ozfjzk0003zgo0ogx45eqb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         
