@@ -61,6 +61,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hihocoder-1039题解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/23/hihocoder-1039题解/" class="article-date">
+  <time datetime="2017-04-23T13:51:25.000Z" itemprop="datePublished">2017-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/23/hihocoder-1039题解/">hihocoder-1039题解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>小Hi最近在玩一个字符消除游戏。给定一个只包含大写字母”ABC”的字符串s，消除过程是如下进行的：</p>
+<p>1)如果s包含长度超过1的由相同字母组成的子串，那么这些子串会被同时消除，余下的子串拼成新的字符串。例如”ABCCBCCCAA”中”CC”,”CCC”和”AA”会被同时消除，余下”AB”和”B”拼成新的字符串”ABB”。</p>
+<p>2)上述消除会反复一轮一轮进行，直到新的字符串不包含相邻的相同字符为止。例如”ABCCBCCCAA”经过一轮消除得到”ABB”，再经过一轮消除得到”A”</p>
+<p>游戏中的每一关小Hi都会面对一个字符串s。在消除开始前小Hi有机会在s中任意位置(第一个字符之前、最后一个字符之后以及相邻两个字符之间)插入任意一个字符(‘A’,’B’或者’C’)，得到字符串t。t经过一系列消除后，小Hi的得分是消除掉的字符的总数。</p>
+<p>请帮助小Hi计算要如何插入字符，才能获得最高得分。</p>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>输入第一行是一个整数T(1&lt;=T&lt;=100)，代表测试数据的数量。</p>
+<p>之后T行每行一个由’A’’B’’C’组成的字符串s，长度不超过100。</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>对于每一行输入的字符串，输出小Hi最高能得到的分数。</p>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>第一组数据：在”ABCBCCCAA”的第2个字符后插入’C’得到”ABCCBCCCAA”，消除后得到”A”，总共消除9个字符(包括插入的’C’)。</p>
+<p>第二组数据：”AAA”插入’A’得到”AAAA”，消除后得到””，总共消除4个字符。</p>
+<p>第三组数据：无论是插入字符后得到”AABC”,”ABBC”还是”ABCC”都最多消除2个字符。</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span></div><div class="line">ABCBCCCAA</div><div class="line">AAA</div><div class="line">ABC</div></pre></td></tr></table></figure>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">9</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<p>刚开始的想法是将得到的字符串先消除相同的的字母，得到一个相邻位置没有字母的字符串，然后再通过每一个字母来中心扩展找到最大对称字符串长度，则分数就为得到的字符串长度-消除相邻字母后的长度+最大对称字符串长度+1（加入的字符必可消除）eg:(BBCCBACABA)-&gt;(BACABA)-&gt;(BACCABA)-&gt;(A)<br>但是发现WA，举反例后发现BBBAB插入为BABBAB消除后字符串为空，但我的算法消除为剩一个A或B，故还是只能用暴力解法，在每个位置加入字母’A’,’B’,’C’</p>
+<p>以下为AC的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">make</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> i, <span class="built_in">string</span> c)</span></span>&#123;</div><div class="line">	s.insert(i, c);</div><div class="line">	<span class="keyword">int</span> n1,n;</div><div class="line">	n = s.length();</div><div class="line">	<span class="keyword">while</span> (<span class="literal">true</span>)&#123;</div><div class="line">		n1 = s.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length() - <span class="number">1</span>&amp;&amp;s.length()!=<span class="number">0</span>; i++)&#123;</div><div class="line">			<span class="keyword">if</span> (s[i + <span class="number">1</span>] == s[i])&#123;</div><div class="line">				<span class="keyword">while</span> (i + <span class="number">1</span> &lt; s.length() &amp;&amp; s[i + <span class="number">1</span>] == s[i])s.erase(i + <span class="number">1</span>, <span class="number">1</span>);</div><div class="line">				s.erase(i, <span class="number">1</span>);</div><div class="line">				i--;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (n1 == s.length())<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> n - n1;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">string</span> s;</div><div class="line">	<span class="keyword">int</span> i, j, count,T;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; T;</div><div class="line">	<span class="keyword">while</span> (T--)&#123;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s;</div><div class="line">		count = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= s.length(); i++)&#123;</div><div class="line">			count = max(make(s, i, <span class="string">"A"</span>), count);</div><div class="line">			count = max(make(s, i, <span class="string">"B"</span>), count);</div><div class="line">			count = max(make(s, i, <span class="string">"C"</span>), count);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; count &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://VampireKnigh.github.io/2017/04/23/hihocoder-1039题解/" data-id="cj1urmb2d000088o0fl7kynjd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端资源的积累" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/前端资源的积累/" class="article-date">
+  <time datetime="2017-04-20T11:57:01.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/前端资源的积累/">前端资源的积累</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://VampireKnigh.github.io/2017/04/20/前端资源的积累/" data-id="cj1urmb3q000488o0q4v8rgay" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-css绘制三角形原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/19/css绘制三角形原理/" class="article-date">
@@ -115,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/19/css绘制三角形原理/" data-id="cj1ozfjwf0000zgo0hv6rt29e" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/19/css绘制三角形原理/" data-id="cj1urmb43000588o0xhdjslqa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css积累/">css积累</a></li></ul>
@@ -158,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/18/div+css积累/" data-id="cj1ozfjze0001zgo01jgx4m6q" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/18/div+css积累/" data-id="cj1urmb4o000888o0u8ymcgw5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css积累/">css积累</a></li></ul>
@@ -205,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/18/hello-world/" data-id="cj1ozfjzk0003zgo0ogx45eqb" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/18/hello-world/" data-id="cj1urmb3e000388o0ex4awoqr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +316,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
   </div>
 
@@ -237,7 +326,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/css积累/" style="font-size: 10px;">css积累</a>
+      <a href="/tags/css积累/" style="font-size: 20px;">css积累</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
     </div>
   </div>
 
@@ -257,6 +346,14 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/23/hihocoder-1039题解/">hihocoder-1039题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/前端资源的积累/">前端资源的积累</a>
+          </li>
         
           <li>
             <a href="/2017/04/19/css绘制三角形原理/">css绘制三角形原理及各种几何图形实现</a>
