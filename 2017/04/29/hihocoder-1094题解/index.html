@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hihocoder-1094题解 | yd&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="描述Little Hi gets lost in the city. He does not know where he is. He does not know which direction is north. Fortunately, Little Hi has a map of the city. The map can be considered as a grid of N*M blo">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hihocoder-1094题解">
+<meta property="og:url" content="http://VampireKnigh.github.io/2017/04/29/hihocoder-1094题解/index.html">
+<meta property="og:site_name" content="yd's blog">
+<meta property="og:description" content="描述Little Hi gets lost in the city. He does not know where he is. He does not know which direction is north. Fortunately, Little Hi has a map of the city. The map can be considered as a grid of N*M blo">
+<meta property="og:updated_time" content="2017-04-29T02:25:28.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hihocoder-1094题解">
+<meta name="twitter:description" content="描述Little Hi gets lost in the city. He does not know where he is. He does not know which direction is north. Fortunately, Little Hi has a map of the city. The map can be considered as a grid of N*M blo">
+  
+    <link rel="alternate" href="/atom.xml" title="yd&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yd&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://VampireKnigh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hihocoder-1094题解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/29/hihocoder-1094题解/" class="article-date">
+  <time datetime="2017-04-29T02:15:46.000Z" itemprop="datePublished">2017-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hihocoder-1094题解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>Little Hi gets lost in the city. He does not know where he is. He does not know which direction is north.</p>
+<p>Fortunately, Little Hi has a map of the city. The map can be considered as a grid of N*M blocks. Each block is numbered by a pair of integers. The block at the north-west corner is (1, 1) and the one at the south-east corner is (N, M). Each block is represented by a character, describing the construction on that block: ‘.’ for empty area, ‘P’ for parks, ‘H’ for houses, ‘S’ for streets, ‘M’ for malls, ‘G’ for government buildings, ‘T’ for trees and etc.</p>
+<p>Given the blocks of 3<em>3 area that surrounding Little Hi(Little Hi is at the middle block of the 3</em>3 area), please find out the position of him. Note that Little Hi is disoriented, the upper side of the surrounding area may be actually north side, south side, east side or west side.</p>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>Line 1: two integers, N and M(3 &lt;= N, M &lt;= 200).<br>Line 2~N+1: each line contains M characters, describing the city’s map. The characters can only be ‘A’-‘Z’ or ‘.’.<br>Line N+2~N+4: each line 3 characters, describing the area surrounding Little Hi.</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>Line 1~K: each line contains 2 integers X and Y, indicating that block (X, Y) may be Little Hi’s position. If there are multiple possible blocks, output them from north to south, west to east.</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">8</span> <span class="number">8</span></div><div class="line">..<span class="selector-class">.HSH</span>..</div><div class="line">..<span class="selector-class">.HSM</span>..</div><div class="line">..<span class="selector-class">.HST</span>..</div><div class="line">..<span class="selector-class">.HSPP</span>.</div><div class="line">PPGHSPPT</div><div class="line">PPSSSSSS</div><div class="line">.<span class="selector-class">.MMSHHH</span></div><div class="line">.<span class="selector-class">.MMSH</span>..</div><div class="line">SSS</div><div class="line">SHG</div><div class="line">SH.</div></pre></td></tr></table></figure>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">5 </span><span class="number">4</span></div></pre></td></tr></table></figure>
+<p>由于小Hi不能确认方向，故有4种方向为北的可能性，<br>$$<br> \begin{bmatrix}<br>   1 &amp; 2 &amp; 3 \<br>   4 &amp; 5 &amp; 6 \<br>   7 &amp; 8 &amp; 9<br>  \end{bmatrix} \tag{1}<br>$$<br>$$<br> \begin{bmatrix}<br>   3 &amp; 6 &amp; 9 \<br>   2 &amp; 5 &amp; 8 \<br>   1 &amp; 4 &amp; 7<br>  \end{bmatrix} \tag{2}<br>$$<br>$$<br> \begin{bmatrix}<br>   7 &amp; 4 &amp; 1 \<br>   8 &amp; 5 &amp; 2 \<br>   9 &amp; 6 &amp; 3<br>  \end{bmatrix} \tag{3}<br>$$<br>$$<br> \begin{bmatrix}<br>   9 &amp; 8 &amp; 7 \<br>   6 &amp; 5 &amp; 4 \<br>   3 &amp; 2 &amp; 1<br>  \end{bmatrix} \tag{4}<br>$$<br>然后找到地图上和a[5][5]相同的字符，再逐一判断4个矩阵a,b,c,d和四周是否相等即可<br>以下为AC代码：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;cmath&gt;</div><div class="line">#include &lt;<span class="type">string</span>&gt;</div><div class="line">using namespace std;</div><div class="line">int main()&#123;</div><div class="line">	int n, m,i,j,flag,t,k;</div><div class="line">	char ch[<span class="number">202</span>][<span class="number">202</span>];</div><div class="line">	char a[<span class="number">4</span>][<span class="number">4</span>], b[<span class="number">4</span>][<span class="number">4</span>], c[<span class="number">4</span>][<span class="number">4</span>], d[<span class="number">4</span>][<span class="number">4</span>];</div><div class="line">	for (i = <span class="number">0</span>; i &lt; <span class="number">202</span>; i++)&#123;</div><div class="line">		for (j = <span class="number">0</span>; j &lt; <span class="number">202</span>; j++)&#123;</div><div class="line">			ch[i][j] = '#';</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	cin &gt;&gt; n &gt;&gt; m;</div><div class="line">	for (i = <span class="number">1</span>; i &lt;= n; i++)&#123;</div><div class="line">		for (j = <span class="number">1</span>; j &lt;= m; j++)&#123;</div><div class="line">			cin &gt;&gt; ch[i][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	for (i = <span class="number">1</span>; i &lt; <span class="number">4</span>; i++)&#123;</div><div class="line">		for (j = <span class="number">1</span>; j &lt; <span class="number">4</span>; j++)&#123;</div><div class="line">			cin &gt;&gt; a[i][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	d[<span class="number">3</span>][<span class="number">3</span>] = c[<span class="number">1</span>][<span class="number">3</span>] = b[<span class="number">3</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">1</span>];<span class="comment">//1</span></div><div class="line">	d[<span class="number">3</span>][<span class="number">2</span>] = c[<span class="number">2</span>][<span class="number">3</span>] = b[<span class="number">2</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">2</span>];<span class="comment">//2</span></div><div class="line">	d[<span class="number">3</span>][<span class="number">1</span>] = c[<span class="number">3</span>][<span class="number">3</span>] = b[<span class="number">1</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">3</span>];<span class="comment">//3</span></div><div class="line">	d[<span class="number">2</span>][<span class="number">3</span>] = c[<span class="number">1</span>][<span class="number">2</span>] = b[<span class="number">3</span>][<span class="number">2</span>] = a[<span class="number">2</span>][<span class="number">1</span>];<span class="comment">//4</span></div><div class="line">	d[<span class="number">2</span>][<span class="number">2</span>] = c[<span class="number">2</span>][<span class="number">2</span>] = b[<span class="number">2</span>][<span class="number">2</span>] = a[<span class="number">2</span>][<span class="number">2</span>];<span class="comment">//5</span></div><div class="line">	d[<span class="number">2</span>][<span class="number">1</span>] = c[<span class="number">3</span>][<span class="number">2</span>] = b[<span class="number">1</span>][<span class="number">2</span>] = a[<span class="number">2</span>][<span class="number">3</span>];<span class="comment">//6</span></div><div class="line">	d[<span class="number">1</span>][<span class="number">3</span>] = c[<span class="number">1</span>][<span class="number">1</span>] = b[<span class="number">3</span>][<span class="number">3</span>] = a[<span class="number">3</span>][<span class="number">1</span>];<span class="comment">//7</span></div><div class="line">	d[<span class="number">1</span>][<span class="number">2</span>] = c[<span class="number">2</span>][<span class="number">1</span>] = b[<span class="number">2</span>][<span class="number">3</span>] = a[<span class="number">3</span>][<span class="number">2</span>];<span class="comment">//8</span></div><div class="line">	d[<span class="number">1</span>][<span class="number">1</span>] = c[<span class="number">3</span>][<span class="number">1</span>] = b[<span class="number">1</span>][<span class="number">3</span>] = a[<span class="number">3</span>][<span class="number">3</span>];<span class="comment">//9</span></div><div class="line">	for (i = <span class="number">1</span>; i &lt;= n; i++)&#123;</div><div class="line">		for (j = <span class="number">1</span>; j &lt;= m; j++)&#123;</div><div class="line">			if (a[<span class="number">2</span>][<span class="number">2</span>] == ch[i][j])&#123;</div><div class="line">				flag = <span class="number">1</span>;</div><div class="line">				for (t = <span class="number">1</span>; t &lt; <span class="number">4</span>; t++)&#123;</div><div class="line">					for (k = <span class="number">1</span>; k &lt; <span class="number">4</span>; k++)&#123;</div><div class="line">						if (a[t][k] != ch[i + t - <span class="number">2</span>][j + k - <span class="number">2</span>])&#123;</div><div class="line">							flag = <span class="number">0</span>; break;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				if (flag == <span class="number">1</span>)cout &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; j &lt;&lt; endl;</div><div class="line">				else&#123;</div><div class="line">					flag = <span class="number">1</span>;</div><div class="line">					for (t = <span class="number">1</span>; t &lt; <span class="number">4</span>; t++)&#123;</div><div class="line">						for (k = <span class="number">1</span>; k &lt; <span class="number">4</span>; k++)&#123;</div><div class="line">							if (b[t][k] != ch[i + t - <span class="number">2</span>][j + k - <span class="number">2</span>])&#123;</div><div class="line">								flag = <span class="number">0</span>; break;</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">					if (flag == <span class="number">1</span>)cout &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; j &lt;&lt; endl;</div><div class="line">					else&#123;</div><div class="line">						flag = <span class="number">1</span>;</div><div class="line">						for (t = <span class="number">1</span>; t &lt; <span class="number">4</span>; t++)&#123;</div><div class="line">							for (k = <span class="number">1</span>; k &lt; <span class="number">4</span>; k++)&#123;</div><div class="line">								if (c[t][k] != ch[i + t - <span class="number">2</span>][j + k - <span class="number">2</span>])&#123;</div><div class="line">									flag = <span class="number">0</span>; break;</div><div class="line">								&#125;</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">						if (flag == <span class="number">1</span>)cout &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; j &lt;&lt; endl;</div><div class="line">						else&#123;</div><div class="line">							flag = <span class="number">1</span>;</div><div class="line">							for (t = <span class="number">1</span>; t &lt; <span class="number">4</span>; t++)&#123;</div><div class="line">								for (k = <span class="number">1</span>; k &lt; <span class="number">4</span>; k++)&#123;</div><div class="line">									if (d[t][k] != ch[i + t - <span class="number">2</span>][j + k - <span class="number">2</span>])&#123;</div><div class="line">										flag = <span class="number">0</span>; break;</div><div class="line">									&#125;</div><div class="line">								&#125;</div><div class="line">							&#125;</div><div class="line">							if (flag == <span class="number">1</span>)cout &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; j &lt;&lt; endl;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://VampireKnigh.github.io/2017/04/29/hihocoder-1094题解/" data-id="cj22nanxy0006ako09wlr9r86" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/28/hihocode-1051题解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hihocode-1051题解
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/css积累/" style="font-size: 10px;">css积累</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/29/hihocoder-1094题解/">hihocoder-1094题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/28/hihocode-1051题解/">hihocode-1051题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/23/hihocoder-1039题解/">hihocoder-1039题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/前端资源的积累/">前端资源的积累</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/css绘制三角形原理/">css绘制三角形原理及各种几何图形实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 yd<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
