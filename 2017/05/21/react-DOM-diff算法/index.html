@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>react DOM diff算法 | yd&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="DOM diff算法认识首先认识到React组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心">
+<meta name="keywords" content="react 前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react DOM diff算法">
+<meta property="og:url" content="http://VampireKnigh.github.io/2017/05/21/react-DOM-diff算法/index.html">
+<meta property="og:site_name" content="yd's blog">
+<meta property="og:description" content="DOM diff算法认识首先认识到React组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心">
+<meta property="og:image" content="https://sfault-image.b0.upaiyun.com/277/884/2778846299-5707849bd3992">
+<meta property="og:image" content="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909000.png">
+<meta property="og:image" content="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909001.png">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/61ff3868gw1ey1zjqh0shj20f2065js4.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/61ff3868gw1ey22lddptuj20e507f74r.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/61ff3868gw1ey23a4zm67j20ef08igm9.jpg">
+<meta property="og:image" content="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909003.png">
+<meta property="og:image" content="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909007.png">
+<meta property="og:updated_time" content="2017-05-21T04:03:42.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react DOM diff算法">
+<meta name="twitter:description" content="DOM diff算法认识首先认识到React组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心">
+<meta name="twitter:image" content="https://sfault-image.b0.upaiyun.com/277/884/2778846299-5707849bd3992">
+  
+    <link rel="alternate" href="/atom.xml" title="yd&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yd&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://VampireKnigh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-react-DOM-diff算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/21/react-DOM-diff算法/" class="article-date">
+  <time datetime="2017-05-21T03:10:01.000Z" itemprop="datePublished">2017-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react DOM diff算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="DOM-diff算法认识"><a href="#DOM-diff算法认识" class="headerlink" title="DOM diff算法认识"></a>DOM diff算法认识</h2><p>首先认识到React组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。<br>React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心 Virtual DOM 背后的运作原理，因为 React diff 会帮助我们计算出 Virtual DOM 中真正变化的部分，并只针对该部分进行实际 DOM 操作，而非重新渲染整个页面，从而保证了每次操作更新后页面的高效渲染，因此 Virtual DOM 与 diff 是保证 React 性能口碑的幕后推手。<br>在React中，构建UI界面的思路是由当前状态决定界面。前后两个状态就对应两套界面，然后由React来比较两个界面的区别，这就需要对DOM树进行Diff算法分析。</p>
+<p>即给定任意两棵树，找到最少的转换步骤。</p>
+<h2 id="传统-diff-算法"><a href="#传统-diff-算法" class="headerlink" title="传统 diff 算法"></a>传统 diff 算法</h2><p>传统 diff 算法通过循环递归对节点进行依次对比，效率低下，算法复杂度达到 O(n3)。现今的 CPU 每秒钟能执行大约30亿条指令，即便是最高效的实现，也不可能在一秒内计算出差异情况。<br>传统的diff算法通过递归实现:<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> result = [];</div><div class="line"><span class="comment">// 比较叶子节点</span></div><div class="line"><span class="keyword">const</span> diffLeafs = <span class="function"><span class="keyword">function</span>(<span class="params">beforeLeaf, afterLeaf</span>) </span>&#123;</div><div class="line">  <span class="comment">// 获取较大节点树的长度</span></div><div class="line">  <span class="keyword">let</span> count = <span class="built_in">Math</span>.max(beforeLeaf.children.length, afterLeaf.children.length);</div><div class="line">  <span class="comment">// 循环遍历</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">    <span class="keyword">const</span> beforeTag = beforeLeaf.children[i];</div><div class="line">    <span class="keyword">const</span> afterTag = afterLeaf.children[i];</div><div class="line">    <span class="comment">// 添加 afterTag 节点</span></div><div class="line">    <span class="keyword">if</span> (beforeTag === <span class="literal">undefined</span>) &#123;</div><div class="line">      result.push(&#123;<span class="keyword">type</span>: <span class="string">"add"</span>, element: afterTag&#125;);</div><div class="line">    <span class="comment">// 删除 beforeTag 节点</span></div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (afterTag === <span class="literal">undefined</span>) &#123;</div><div class="line">      result.push(&#123;<span class="keyword">type</span>: <span class="string">"remove"</span>, element: beforeTag&#125;);</div><div class="line">    <span class="comment">// 节点名改变时，删除 beforeTag 节点，添加 afterTag 节点</span></div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (beforeTag.tagName !== afterTag.tagName) &#123;</div><div class="line">      result.push(&#123;<span class="keyword">type</span>: <span class="string">"remove"</span>, element: beforeTag&#125;);</div><div class="line">      result.push(&#123;<span class="keyword">type</span>: <span class="string">"add"</span>, element: afterTag&#125;);</div><div class="line">    <span class="comment">// 节点不变而内容改变时，改变节点</span></div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (beforeTag.innerHTML !== afterTag.innerHTML) &#123;</div><div class="line">      <span class="keyword">if</span> (beforeTag.children.length === <span class="number">0</span>) &#123;</div><div class="line">        result.push(&#123;</div><div class="line">          <span class="keyword">type</span>: <span class="string">"changed"</span>,</div><div class="line">          beforeElement: beforeTag,</div><div class="line">          afterElement: afterTag,</div><div class="line">          html: afterTag.innerHTML</div><div class="line">      &#125;);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 递归比较</span></div><div class="line">        diffLeafs(beforeTag, afterTag);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="React-diff"><a href="#React-diff" class="headerlink" title="React diff"></a>React diff</h2><p>React 通过制定大胆的策略，将 O(n3) 复杂度的问题转换成 O(n) 复杂度的问题。那么肯定会有一些地方有牺牲。</p>
+<h3 id="diff-策略"><a href="#diff-策略" class="headerlink" title="diff 策略"></a>diff 策略</h3><ol>
+<li>Web UI 中 DOM 节点跨层级的移动操作特别少，可以忽略不计。</li>
+<li>拥有相同类的两个组件将会生成相似的树形结构，拥有不同类的两个组件将会生成不同的树形结构。</li>
+<li>对于同一层级的一组子节点，它们可以通过唯一 id 进行区分。<br>基于以上三个前提策略，React 分别对 tree diff、component diff 以及 element diff 进行算法优化，事实也证明这三个前提策略是合理且准确的，它保证了整体界面构建的性能。<br><img src="https://sfault-image.b0.upaiyun.com/277/884/2778846299-5707849bd3992" alt="react diff"></li>
+</ol>
+<h4 id="tree-diff"><a href="#tree-diff" class="headerlink" title="tree diff"></a>tree diff</h4><p>React 对树的算法进行了简洁明了的优化，即对树进行分层比较，两棵树只会对同一层次的节点进行比较。<br><img src="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909000.png" alt=""><br>React只会对相同颜色方框内的DOM节点进行比较，即同一个父节点下的所有子节点。当发现节点已经不存在，则该节点及其子节点会被完全删除掉，不会用于进一步的比较。这样只需要对树进行一次遍历，便能完成整个DOM树的比较。<br>若有跨层的树：<br><img src="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909001.png" alt=""><br>A节点被整个移动到D节点下，直观的考虑DOM Diff操作应该是<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">A</span><span class="selector-class">.parent</span><span class="selector-class">.remove</span>(<span class="selector-tag">A</span>); </div><div class="line"><span class="selector-tag">D</span><span class="selector-class">.append</span>(<span class="selector-tag">A</span>);</div></pre></td></tr></table></figure></p>
+<p>但因为React只会简单的考虑同层节点的位置变换，对于不同层的节点，只有简单的创建和删除。当根节点发现子节点中A不见了，就会直接销毁A；而当D发现自己多了一个子节点A，则会创建一个新的A作为子节点。因此对于这种结构的转变的实际操作是：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A.destroy()<span class="comment">;</span></div><div class="line"><span class="attribute">A</span> = new A()<span class="comment">;</span></div><div class="line">A.append(new B())<span class="comment">;</span></div><div class="line">A.append(new C())<span class="comment">;</span></div><div class="line">D.append(A)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>由此可发现，当出现节点跨层级移动时，并不会出现想象中的移动操作，而是以 A 为根节点的树被整个重新创建，这是一种影响 React 性能的操作，因此<strong>React 官方建议不要进行 DOM 节点跨层级的操作。</strong></p>
+<h4 id="component-diff"><a href="#component-diff" class="headerlink" title="component diff"></a>component diff</h4><p>如下图，当 component D 改变为 component G 时，即使这两个 component 结构相似，一旦 React 判断 D 和 G 是不同类型的组件，就不会比较二者的结构，而是直接删除 component D，重新创建 component G 以及其子节点。虽然当两个 component 是不同类型但结构相似时，React diff 会影响性能，但正如 React 官方博客所言：不同类型的 component 是很少存在相似 DOM tree 的机会，因此这种极端因素很难在实现开发过程中造成重大影响的。<br><img src="http://ww3.sinaimg.cn/mw690/61ff3868gw1ey1zjqh0shj20f2065js4.jpg" alt=""></p>
+<h4 id="element-diff"><a href="#element-diff" class="headerlink" title="element diff"></a>element diff</h4><p>当节点处于同一层级时，React diff 提供了三种节点操作，分别为：INSERT_MARKUP（插入）、MOVE_EXISTING（移动）和 REMOVE_NODE（删除）。</p>
+<ol>
+<li><p>INSERT_MARKUP，新的 component 类型不在老集合里， 即是全新的节点，需要对新节点执行插入操作。</p>
+</li>
+<li><p>MOVE_EXISTING，在老集合有新 component 类型，且 element 是可更新的类型，generateComponentChildren 已调用 receiveComponent，这种情况下 prevChild=nextChild，就需要做移动操作，可以复用以前的 DOM 节点。</p>
+</li>
+<li><p>REMOVE_NODE，老 component 类型，在新集合里也有，但对应的 element 不同则不能直接复用和更新，需要执行删除操作，或者老 component 不在新集合里的，也需要执行删除操作。<br>如下图，老集合中包含节点：A、B、C、D，更新后的新集合中包含节点：B、A、D、C，此时新老集合进行 diff 差异化对比，发现 B != A，则创建并插入 B 至新集合，删除老集合 A；以此类推，创建并插入 A、D 和 C，删除 B、C 和 D。<br><img src="http://ww2.sinaimg.cn/mw690/61ff3868gw1ey22lddptuj20e507f74r.jpg" alt=""><br>针对这一现象，React 提出优化策略：允许开发者对同一层级的同组子节点，添加唯一 key 进行区分，虽然只是小小的改动，性能上却发生了翻天覆地的变化！<br>此时 React 给出的 diff 结果为：B、D 不做任何操作，A、C 进行移动操作<br><img src="http://ww1.sinaimg.cn/mw690/61ff3868gw1ey23a4zm67j20ef08igm9.jpg" alt=""><br>针对key有个小的问题<br><img src="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909003.png" alt=""><br>这是React在遇到列表时却又找不到key时提示的警告。虽然无视这条警告大部分界面也会正确工作，但这通常意味着潜在的性能问题。因为React觉得自己可能无法高效的去更新这个列表。<br>对于下图：<br><img src="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909007.png" alt=""><br>即将同一层的节点位置进行调整。如果未提供key，那么React认为B和C之后的对应位置组件类型不同，因此完全删除后重建，控制台输出如下：</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">B will unmount.</div><div class="line">C will unmount.</div><div class="line">C is created.</div><div class="line">B is created.</div><div class="line">C did mount.</div><div class="line">B did mount.</div><div class="line">A is updated.</div><div class="line">R is updated.</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>而如果提供了key，如下面的代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">shape5: function() &#123;</div><div class="line">  return (</div><div class="line">    <span class="tag">&lt;<span class="name">Root</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">A</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">B</span> <span class="attr">key</span>=<span class="string">"B"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">C</span> <span class="attr">key</span>=<span class="string">"C"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">A</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;,</div><div class="line"></div><div class="line">shape6: function() &#123;</div><div class="line">  return (</div><div class="line">    <span class="tag">&lt;<span class="name">Root</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">A</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">C</span> <span class="attr">key</span>=<span class="string">"C"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">B</span> <span class="attr">key</span>=<span class="string">"B"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">A</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>那么控制台输出如下：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C <span class="keyword">is</span> updated.</div><div class="line">B <span class="keyword">is</span> updated.</div><div class="line">A <span class="keyword">is</span> updated.</div><div class="line">R <span class="keyword">is</span> updated.</div></pre></td></tr></table></figure></p>
+<p>可以看到，对于列表节点提供唯一的key属性可以帮助React定位到正确的节点进行比较，从而大幅减少DOM操作次数，提高了性能。</p>
+<h2 id="由DOM-Diff算法理解组件的生命周期"><a href="#由DOM-Diff算法理解组件的生命周期" class="headerlink" title="由DOM Diff算法理解组件的生命周期"></a>由DOM Diff算法理解组件的生命周期</h2><p>示例()<br>观察控制台查看生命状态</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://VampireKnigh.github.io/2017/05/21/react-DOM-diff算法/" data-id="cj2y6ifn900035ko01uygtcly" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-前端/">react 前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/13/基于文件上传进度条实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          基于文件上传进度条实现
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-前端/">react 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/css积累/" style="font-size: 15px;">css积累</a> <a href="/tags/react-前端/" style="font-size: 10px;">react 前端</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/21/react-DOM-diff算法/">react DOM diff算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/13/基于文件上传进度条实现/">基于文件上传进度条实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/hihocoder-1094题解/">hihocoder-1094题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/28/hihocode-1051题解/">hihocode-1051题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/23/hihocoder-1039题解/">hihocoder-1039题解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 yd<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
