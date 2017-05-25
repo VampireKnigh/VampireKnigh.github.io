@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gulp和webpack的区别 | yd&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端开发和其他开发工作的主要区别，首先是前端是基于多语言、多层次的编码和组织工作，其次前端产品的交付是基于浏览器，这些资源是通过增量加载的方式运行到浏览器端，如何在开发环境组织好这些碎片化的代码和资源，并且保证他们在浏览器端快速、优雅的加载和更新，就需要一个模块化系统，这个理想中的模块化系统是前端工程师多年来一直探索的难题。 GulpGulp就是为了规范前端开发流程，实现前后端分离、模块化开发、版">
+<meta name="keywords" content="前端构建工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp和webpack的区别">
+<meta property="og:url" content="http://VampireKnigh.github.io/2017/05/25/gulp和webpack的区别/index.html">
+<meta property="og:site_name" content="yd's blog">
+<meta property="og:description" content="前端开发和其他开发工作的主要区别，首先是前端是基于多语言、多层次的编码和组织工作，其次前端产品的交付是基于浏览器，这些资源是通过增量加载的方式运行到浏览器端，如何在开发环境组织好这些碎片化的代码和资源，并且保证他们在浏览器端快速、优雅的加载和更新，就需要一个模块化系统，这个理想中的模块化系统是前端工程师多年来一直探索的难题。 GulpGulp就是为了规范前端开发流程，实现前后端分离、模块化开发、版">
+<meta property="og:updated_time" content="2017-05-25T09:00:15.603Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp和webpack的区别">
+<meta name="twitter:description" content="前端开发和其他开发工作的主要区别，首先是前端是基于多语言、多层次的编码和组织工作，其次前端产品的交付是基于浏览器，这些资源是通过增量加载的方式运行到浏览器端，如何在开发环境组织好这些碎片化的代码和资源，并且保证他们在浏览器端快速、优雅的加载和更新，就需要一个模块化系统，这个理想中的模块化系统是前端工程师多年来一直探索的难题。 GulpGulp就是为了规范前端开发流程，实现前后端分离、模块化开发、版">
+  
+    <link rel="alternate" href="/atom.xml" title="yd&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yd&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://VampireKnigh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gulp和webpack的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/25/gulp和webpack的区别/" class="article-date">
+  <time datetime="2017-05-25T07:27:13.000Z" itemprop="datePublished">2017-05-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gulp和webpack的区别
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前端开发和其他开发工作的主要区别，首先是前端是基于多语言、多层次的编码和组织工作，其次前端产品的交付是基于浏览器，这些资源是通过增量加载的方式运行到浏览器端，如何在开发环境组织好这些碎片化的代码和资源，并且保证他们在浏览器端快速、优雅的加载和更新，就需要一个模块化系统，这个理想中的模块化系统是前端工程师多年来一直探索的难题。</p>
+<h2 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h2><p>Gulp就是为了规范前端开发流程，实现前后端分离、模块化开发、版本控制、文件合并与压缩、mock数据等功能的一个<strong>前端自动化构建工具</strong>。说的形象点，“Gulp就像是一个产品的流水线，整个产品从无到有，都要受流水线的控制，在流水线上我们可以对产品进行管理。”</p>
+<p>另外，Gulp是通过task对整个开发过程进行构建。</p>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><p>Webpack 是当下最热门的<strong>前端资源模块化管理和打包工具</strong>。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到实际需要的时候再异步加载。通过 loader的转换，任何形式的资源都可以视作模块，比如 CommonJs 模块、AMD 模块、ES6 模块、CSS、图片、JSON、Coffeescript、LESS 等。</p>
+<h2 id="Gulp和Webpack功能实现对比"><a href="#Gulp和Webpack功能实现对比" class="headerlink" title="Gulp和Webpack功能实现对比"></a>Gulp和Webpack功能实现对比</h2><p>简单介绍了一下Gulp和Webpack的概念性的问题和大环境，接下来进入本文的主题，对比一下Gulp和Webpack的优缺点。将从基本概念、模块化开发、文件合并与压缩、启动本地Server、mock数据、版本控制几个方面对Gulp和Webpack进行对比。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>首先从概念上，我们可以清楚的看出，Gulp和Webpack的侧重点是不同的。</p>
+<p>Gulp侧重于前端开发的整个过程的控制管理（像是流水线），我们可以通过给gulp配置不通的task（通过Gulp中的gulp.task()方法配置，比如启动server、sass/less预编译、文件的合并压缩等等）来让gulp实现不同的功能，从而构建整个前端开发流程。</p>
+<p>Webpack有人也称之为模块打包机，由此也可以看出Webpack更侧重于模块打包，当然我们可以把开发中的所有资源（图片、js文件、css文件等）都可以看成模块，最初Webpack本身就是为前端JS代码打包而设计的，后来被扩展到其他资源的打包处理。Webpack是通过loader（加载器）和plugins（插件）对资源进行处理的。</p>
+<p>另外我们知道Gulp是对整个过程进行控制，所以在其配置文件（gulpfile.js）中配置的每一个task对项目中该task配置路径下所有的资源都可以管理。<br>Webpack则不是这样管理资源的，它是根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源</p>
+<h3 id="模块化开发"><a href="#模块化开发" class="headerlink" title="模块化开发"></a>模块化开发</h3><p>所谓的前端模块化开发是指，在开发的时候，把不通的资源文件按照他的具体用途进行分类管理，在使用的时候利用CommonJS、AMD、CMD等规范将这些资源文件引入到当前文件中。然后在测试或者最后上线的时候，将这些资源文件按照一定的要求进行压缩合并再加上版本控制处理。即<strong>对内容的管理，是为了解耦合。</strong></p>
+<p>在实际开发过程中，在src目录下工作，html、js和css等文件通过gulp的task配置，执行合并和压缩后输出到build目录下。在详细一点就是：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">1. </span>创建主页html文件</div><div class="line"><span class="bullet">2. </span>创建与之对应的app.js入口文件和app.scss入口文件。这两个文件只通过CommonJS规范引入各自views文件中自定义的js(或scss)文件，具体逻辑不写此文件中。</div><div class="line"><span class="bullet">3. </span>在views目录下编写js（或css）文件的逻辑代码，其中如果多个文件需要公共逻辑或者工具方法，就可以抽离出来在util文件夹下创建对应的公共方法，然后在views中需要的js（或css）文件中通过CommonJS规范引入使用。libs目录下的第三方库或框架也是这个思想去引用。</div><div class="line"><span class="bullet">4. </span>scripts目录下的tpls文件是用来放置html模板的，引用方式和引用libs相同。</div></pre></td></tr></table></figure></p>
+<p>webpack的模块化实现和Gulp的基本相同，只不过实现过程中使用到的插件或者说模块不同，配置不同而已。对于解决webpack文件之间的依赖关系，可以使用extract-text-webpack-plugin的模块将css文件从js文件中剥离出来。</p>
+<h3 id="文件合并与压缩"><a href="#文件合并与压缩" class="headerlink" title="文件合并与压缩"></a>文件合并与压缩</h3><p>上面的模块化中，模块化其实很大一部分是在做文件的合并与压缩操作。<br>Webpack应该比Gulp更擅长文件合并和压缩，毕竟人家被称为模块打包机。</p>
+<p>Gulp可以对css文件以及js文件进行合并压缩处理，而Webpack可以实现对css文件，js文件，html文件等进行合并压缩和图片的压缩，还可以对js文件进行编译（如es6–&gt;es5，react jsx）等等，这些都是通过Webpack的loader实现的，当然这些也可以加入到Gulp中，毕竟Gulp把Webpack当做一个模块，通过gulp-webpack都引入了。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">gulp</th>
+<th style="text-align:center">webpack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>css的压缩</td>
+<td style="text-align:center">gulp-minify-css</td>
+<td style="text-align:center">uglifyJS(style-loader!css-loader 读取和插入)</td>
+</tr>
+<tr>
+<td>js合并压缩</td>
+<td style="text-align:center">gulp-uglify和gulp-concat</td>
+<td style="text-align:center">uglifyJS</td>
+</tr>
+<tr>
+<td>html合并压缩</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">HtmlWebpackPlugin（创建index.html）html-minifier</td>
+</tr>
+<tr>
+<td>sass/less预编译</td>
+<td style="text-align:center">gulp-sass 和gulp-less</td>
+<td style="text-align:center">scss-loader、less-loader</td>
+</tr>
+<tr>
+<td>图片的压缩</td>
+<td style="text-align:center">gulp-imagemin和imagemin-pngquant</td>
+<td style="text-align:center">url-loader?limit=8192</td>
+</tr>
+</tbody>
+</table>
+<h3 id="启动server"><a href="#启动server" class="headerlink" title="启动server"></a>启动server</h3><p>gulp启动server: gulp-server模块</p>
+<p>livereload:true属性只是监控到我们修改文件后刷新浏览器重新请求文件</p>
+<p>webpack启动server: webpack-dev-server模块<br>一是为静态文件提供server服务，二是自动刷新和热替换(HMR)<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">webpack</span><span class="literal">-</span><span class="comment">dev</span><span class="literal">-</span><span class="comment">server</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">inline</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">hot</span></div></pre></td></tr></table></figure></p>
+<h3 id="mock数据"><a href="#mock数据" class="headerlink" title="mock数据"></a>mock数据</h3><p>Gulp中对mock数据的实现使通过NodeJS内置的fs模块和url模块实现的。<br>具体来说，就是通过NodeJS拦截http请求，根据请求URL来模拟后端做出处理后返回不同的数据。<br>webpack通过json-server来实现，它的实现原理就是，启动一个本地3000端口作为mock数据的端口，然后我们在Webpack中配置一个代理，让所有请求代理到3000端口上去，就可以获取到数据了。</p>
+<h3 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h3><p>gulp通过gulp-rev和gulp-rev-collector模块，前者用于生成文件的MD5码文件和按MD5码命名的资源文件，后者是利用MD5码，对文件名进行替换。<br>Webpack中需要版本控制的有css、js文件，不过Webpack的版本控制只实现了将css、js文件添加hash值方式命名的文件方式，修改引用路径中的文件名需手动实现。<br>不过实现确实很简单，只需要将webpack.config.js配置文件中的output.filename和plugins中的输出文件名称修改一下即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Gulp侧重整个过程的控制，Webpack在模块打包方面有特别出众。所以，Gulp + Webpack 组合使用更方便。</p>
+<p>参考自：<br><a href="http://chping.website/2016/10/18/gulp%E5%92%8Cwebpack%E5%AF%B9%E6%AF%94/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">两者对比</a><br><a href="https://github.com/ruanyf/webpack-demos#demo05-image-loader-source" target="_blank" rel="external">webpack</a><br><a href="https://github.com/zhonglimh/Gulp/tree/master/Example1" target="_blank" rel="external">gulp</a><br>未阅读：<br><a href="https://github.com/chemdemo/webpack-seed" target="_blank" rel="external">gulp+webpack1</a><br><a href="https://zhuanlan.zhihu.com/p/21312474" target="_blank" rel="external">gulp+webpack2</a><br><a href="http://www.cnblogs.com/maskmtj/archive/2016/07/21/5597307.html" target="_blank" rel="external">gulp+webpack3</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://VampireKnigh.github.io/2017/05/25/gulp和webpack的区别/" data-id="cj346uli30000x0o02it68lpw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/21/react-DOM-diff算法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          react DOM diff算法
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-前端/">react 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/css积累/" style="font-size: 15px;">css积累</a> <a href="/tags/react-前端/" style="font-size: 10px;">react 前端</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/前端构建工具/" style="font-size: 10px;">前端构建工具</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/25/gulp和webpack的区别/">gulp和webpack的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/21/react-DOM-diff算法/">react DOM diff算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/13/基于文件上传进度条实现/">基于文件上传进度条实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/hihocoder-1094题解/">hihocoder-1094题解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/28/hihocode-1051题解/">hihocode-1051题解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 yd<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
