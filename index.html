@@ -61,6 +61,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-图片优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/15/图片优化/" class="article-date">
+  <time datetime="2017-06-15T06:37:52.000Z" itemprop="datePublished">2017-06-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/15/图片优化/">图片优化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于图片的性能优化有3种，base-64编码，使用SVG，使用CSS sprites</p>
+<h1 id="base-64编码"><a href="#base-64编码" class="headerlink" title="base-64编码"></a>base-64编码</h1><h2 id="base-64理解"><a href="#base-64理解" class="headerlink" title="base-64理解"></a>base-64理解</h2><p>Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，可用于在HTTP环境下传递较长的标识信息。</p>
+<h2 id="base-64优缺点及使用"><a href="#base-64优缺点及使用" class="headerlink" title="base-64优缺点及使用"></a>base-64优缺点及使用</h2><p>优点：</p>
+<ol>
+<li>减少了HTTP请求</li>
+<li>某些文件可以避免跨域的问题</li>
+<li>没有图片更新要重新上传，还要清理缓存的问题<br>缺点：</li>
+<li>增加了CSS文件的尺寸</li>
+<li>编码成本<br>适用于：<br>这类图片不能与其他图片以CSS Sprite的形式存在，只能独行<br>这类图片从诞生之日起，基本上很少被更新<br>这类图片的实际尺寸很小<br>这类图片在网站中大规模使用<br>比如loading的gif,背景虚线</li>
+</ol>
+<p>CSS文件的优点就是重用，因此，如果背景图片就一个地方使用，减少的请求数有限，考虑到其他成本，还不如直接使用普通url图片地址</p>
+<h2 id="base-64编码使用"><a href="#base-64编码使用" class="headerlink" title="base-64编码使用"></a>base-64编码使用</h2><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">background</span>-<span class="built_in">image</span>:url(data:<span class="built_in">image</span>/gif;<span class="built_in">base64</span>,R0lGODlhBAABAIABAMLBwfLx8SH5BAEAAAEALAAAAAAEAAEAAAICRF4AOw==);</div><div class="line"><span class="keyword">or</span></div><div class="line">&lt;img src=<span class="string">"data:image/gif;base64,R0lGODlhAwADAIABAL6+vv///yH5BAEAAAEALAAAAAADAAMAAAIDjA9WADs="</span> /&gt;</div></pre></td></tr></table></figure>
+<p>对文件base-64编码:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">font-face</span>&#123;</div><div class="line">    <span class="attribute">font-family</span>: forTest;</div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAh4 ... RFERuENEGADl7JlY=) <span class="built_in">format</span>(<span class="string">'woff'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://VampireKnigh.github.io/2017/06/15/图片优化/" data-id="cj3y2qqwc0005n8o08h20fmf2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-gulp和webpack的区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/25/gulp和webpack的区别/" class="article-date">
@@ -144,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/05/25/gulp和webpack的区别/" data-id="cj346uli30000x0o02it68lpw" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/05/25/gulp和webpack的区别/" data-id="cj3y2qqwo0009n8o0bqag79zu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li></ul>
@@ -210,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/05/21/react-DOM-diff算法/" data-id="cj346ulje000bx0o0bopakpb6" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/05/21/react-DOM-diff算法/" data-id="cj3y2qqx4000en8o0i1mmwc3k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-前端/">react 前端</a></li></ul>
@@ -363,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/05/13/基于文件上传进度条实现/" data-id="cj346ulju000mx0o0v9l2c0yr" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/05/13/基于文件上传进度条实现/" data-id="cj3y2qqze000nn8o0e9vx5rkn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -409,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/29/hihocoder-1094题解/" data-id="cj346ulk9000ox0o09wdzgd9u" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/29/hihocoder-1094题解/" data-id="cj3y2qqx0000cn8o061eybqsr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -457,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/28/hihocode-1051题解/" data-id="cj346uliz0009x0o0t4s3v2pu" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/28/hihocode-1051题解/" data-id="cj3y2qqw10003n8o0ff5ufh03" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -510,7 +562,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/23/hihocoder-1039题解/" data-id="cj346ulij0003x0o0fqwds5d1" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/23/hihocoder-1039题解/" data-id="cj3y2qqzh000on8o0zszmtmuy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -545,11 +597,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><p><a href="http://www.alloyteam.com/page/0/" target="_blank" rel="external">alloyteam</a><br><a href="http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html" target="_blank" rel="external">阮一峰React技术栈</a><br><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ES6 gitbook</a><br><a href="https://75team.com/" target="_blank" rel="external">奇舞团</a><br><a href="http://www.zhangxinxu.com/" target="_blank" rel="external">张鑫旭</a></p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><a href="http://alloyteam.github.io/gopng/" target="_blank" rel="external">css sprites合成工具goPNG</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/20/前端资源的积累/" data-id="cj346uliz0005x0o0c2ljyj5w" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/20/前端资源的积累/" data-id="cj3y2qqw40004n8o02vgsaeof" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -615,7 +668,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/19/css绘制三角形原理/" data-id="cj346ulij0004x0o0p4vk6qp3" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/19/css绘制三角形原理/" data-id="cj3y2qqv70000n8o0m43oi1sz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css积累/">css积累</a></li></ul>
@@ -658,7 +711,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/18/div+css积累/" data-id="cj346ulij0001x0o0qjlwxxsa" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/04/18/div+css积累/" data-id="cj3y2qqwl0008n8o02i7rap1c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css积累/">css积累</a></li></ul>
@@ -670,52 +723,11 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/18/hello-world/" class="article-date">
-  <time datetime="2017-04-18T03:07:03.109Z" itemprop="datePublished">2017-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/04/18/hello-world/" data-id="cj346uliz0008x0o0pyb6egu1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
 
 
-  
-
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -727,7 +739,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-前端/">react 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-前端/">react 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
   </div>
 
@@ -737,7 +749,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/css积累/" style="font-size: 15px;">css积累</a> <a href="/tags/react-前端/" style="font-size: 10px;">react 前端</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/前端构建工具/" style="font-size: 10px;">前端构建工具</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+      <a href="/tags/css积累/" style="font-size: 15px;">css积累</a> <a href="/tags/react-前端/" style="font-size: 10px;">react 前端</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/前端构建工具/" style="font-size: 10px;">前端构建工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
     </div>
   </div>
 
@@ -746,7 +758,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
     </div>
   </div>
 
@@ -757,6 +769,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/15/图片优化/">图片优化</a>
+          </li>
         
           <li>
             <a href="/2017/05/25/gulp和webpack的区别/">gulp和webpack的区别</a>
@@ -772,10 +788,6 @@
         
           <li>
             <a href="/2017/04/29/hihocoder-1094题解/">hihocoder-1094题解</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/28/hihocode-1051题解/">hihocode-1051题解</a>
           </li>
         
       </ul>
