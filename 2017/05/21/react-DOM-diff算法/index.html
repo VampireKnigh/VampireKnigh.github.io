@@ -20,7 +20,8 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/mw690/61ff3868gw1ey23a4zm67j20ef08igm9.jpg">
 <meta property="og:image" content="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909003.png">
 <meta property="og:image" content="http://cdn3.infoqstatic.com/statics_s2_20170516-0317u5/resource/articles/react-dom-diff/zh/resources/0909007.png">
-<meta property="og:updated_time" content="2017-05-21T09:35:20.153Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-07-01T07:14:46.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react DOM diff算法">
 <meta name="twitter:description" content="DOM diff算法认识首先认识到React组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。React 中最值得称道的部分莫过于 Virtual DOM 与 diff 的完美结合，特别是其高效的 diff 算法，让用户可以无需顾忌性能问题而”任性自由”的刷新页面，让开发者也可以无需关心">
@@ -121,13 +122,13 @@
 <p>而如果提供了key，如下面的代码：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">shape5: function() &#123;</div><div class="line">  return (</div><div class="line">    <span class="tag">&lt;<span class="name">Root</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">A</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">B</span> <span class="attr">key</span>=<span class="string">"B"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">C</span> <span class="attr">key</span>=<span class="string">"C"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">A</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;,</div><div class="line"></div><div class="line">shape6: function() &#123;</div><div class="line">  return (</div><div class="line">    <span class="tag">&lt;<span class="name">Root</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">A</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">C</span> <span class="attr">key</span>=<span class="string">"C"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">B</span> <span class="attr">key</span>=<span class="string">"B"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">A</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></div><div class="line">  );</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
 <p>那么控制台输出如下：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C <span class="keyword">is</span> updated.</div><div class="line">B <span class="keyword">is</span> updated.</div><div class="line">A <span class="keyword">is</span> updated.</div><div class="line">R <span class="keyword">is</span> updated.</div></pre></td></tr></table></figure></p>
-<p>可以看到，对于列表节点提供唯一的key属性可以帮助React定位到正确的节点进行比较，从而大幅减少DOM操作次数，提高了性能。</p>
+<p>可以看到，对于列表节点提供唯一的key属性可以帮助React定位到正确的节点进行比较，从而大幅减少DOM操作次数，提高了性能。<br>React组件更新生命周期状态迁移：<br><img src="http://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="由DOM-Diff算法理解组件的生命周期"><a href="#由DOM-Diff算法理解组件的生命周期" class="headerlink" title="由DOM Diff算法理解组件的生命周期"></a>由DOM Diff算法理解组件的生命周期</h2><p><a href="https://vampireknigh.github.io/react/dom-diff/index.html">示例</a><br>观察控制台查看生命状态</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/05/21/react-DOM-diff算法/" data-id="cj3y2qqx4000en8o0i1mmwc3k" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2017/05/21/react-DOM-diff算法/" data-id="cjdjuwsl80002z4o0zo6fja5i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-前端/">react 前端</a></li></ul>
@@ -169,7 +170,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-前端/">react 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css积累/">css积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-前端/">react 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端构建工具/">前端构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
   </div>
 
@@ -179,7 +180,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/css积累/" style="font-size: 15px;">css积累</a> <a href="/tags/react-前端/" style="font-size: 10px;">react 前端</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/前端构建工具/" style="font-size: 10px;">前端构建工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+      <a href="/tags/Java基础/" style="font-size: 10px;">Java基础</a> <a href="/tags/css积累/" style="font-size: 15px;">css积累</a> <a href="/tags/react-前端/" style="font-size: 10px;">react 前端</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/前端构建工具/" style="font-size: 10px;">前端构建工具</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
     </div>
   </div>
 
@@ -188,7 +189,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul>
     </div>
   </div>
 
@@ -199,6 +200,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/12/Java基础（一）/">Java基础（一）</a>
+          </li>
         
           <li>
             <a href="/2017/06/15/图片优化/">图片优化</a>
@@ -216,10 +221,6 @@
             <a href="/2017/05/13/基于文件上传进度条实现/">基于文件上传进度条实现</a>
           </li>
         
-          <li>
-            <a href="/2017/04/29/hihocoder-1094题解/">hihocoder-1094题解</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -232,7 +233,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 yd<br>
+      &copy; 2018 yd<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

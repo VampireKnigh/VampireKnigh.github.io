@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>图片优化 | yd&#39;s blog</title>
+  <title>Java基础（一） | yd&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对于图片的性能优化有几种，base-64编码(Data-URL)，使用SVG，使用CSS sprites，图片预加载 base-64编码base-64理解Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，可用于在HTTP环境下传递较长的标识信息。 base-64优缺点及使用优点：  减少了HTTP请求 某些文件可以避免跨域的问题 没有图片更新要重新上传，还要清理缓存的问题  缺点">
-<meta name="keywords" content="性能优化">
+  <meta name="description" content="学习《JAVA疯狂讲义》">
+<meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图片优化">
-<meta property="og:url" content="http://VampireKnigh.github.io/2017/06/15/图片优化/index.html">
+<meta property="og:title" content="Java基础（一）">
+<meta property="og:url" content="http://VampireKnigh.github.io/2018/02/12/Java基础（一）/index.html">
 <meta property="og:site_name" content="yd's blog">
-<meta property="og:description" content="对于图片的性能优化有几种，base-64编码(Data-URL)，使用SVG，使用CSS sprites，图片预加载 base-64编码base-64理解Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，可用于在HTTP环境下传递较长的标识信息。 base-64优缺点及使用优点：  减少了HTTP请求 某些文件可以避免跨域的问题 没有图片更新要重新上传，还要清理缓存的问题  缺点">
-<meta property="og:updated_time" content="2017-06-17T07:15:11.496Z">
+<meta property="og:description" content="学习《JAVA疯狂讲义》">
+<meta property="og:updated_time" content="2018-02-12T06:47:31.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图片优化">
-<meta name="twitter:description" content="对于图片的性能优化有几种，base-64编码(Data-URL)，使用SVG，使用CSS sprites，图片预加载 base-64编码base-64理解Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，可用于在HTTP环境下传递较长的标识信息。 base-64优缺点及使用优点：  减少了HTTP请求 某些文件可以避免跨域的问题 没有图片更新要重新上传，还要清理缓存的问题  缺点">
+<meta name="twitter:title" content="Java基础（一）">
+<meta name="twitter:description" content="学习《JAVA疯狂讲义》">
   
     <link rel="alternate" href="/atom.xml" title="yd&#39;s blog" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-图片优化" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Java基础（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/15/图片优化/" class="article-date">
-  <time datetime="2017-06-15T06:37:52.000Z" itemprop="datePublished">2017-06-15</time>
+    <a href="/2018/02/12/Java基础（一）/" class="article-date">
+  <time datetime="2018-02-12T06:46:35.000Z" itemprop="datePublished">2018-02-12</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      图片优化
+      Java基础（一）
     </h1>
   
 
@@ -86,34 +86,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>对于图片的性能优化有几种，base-64编码(Data-URL)，使用SVG，使用CSS sprites，图片预加载</p>
-<h1 id="base-64编码"><a href="#base-64编码" class="headerlink" title="base-64编码"></a>base-64编码</h1><h2 id="base-64理解"><a href="#base-64理解" class="headerlink" title="base-64理解"></a>base-64理解</h2><p>Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一，可用于在HTTP环境下传递较长的标识信息。</p>
-<h2 id="base-64优缺点及使用"><a href="#base-64优缺点及使用" class="headerlink" title="base-64优缺点及使用"></a>base-64优缺点及使用</h2><p>优点：</p>
-<ol>
-<li>减少了HTTP请求</li>
-<li>某些文件可以避免跨域的问题</li>
-<li>没有图片更新要重新上传，还要清理缓存的问题</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>增加了CSS文件的尺寸</li>
-<li>编码成本</li>
-</ol>
-<p>适用于：</p>
-<p>这类图片不能与其他图片以CSS Sprite的形式存在，只能独行<br>这类图片从诞生之日起，基本上很少被更新<br>这类图片的实际尺寸很小<br>这类图片在网站中大规模使用<br>比如loading的gif,背景虚线</p>
-<p>CSS文件的优点就是重用，因此，如果背景图片就一个地方使用，减少的请求数有限，考虑到其他成本，还不如直接使用普通url图片地址</p>
-<h2 id="base-64编码使用"><a href="#base-64编码使用" class="headerlink" title="base-64编码使用"></a>base-64编码使用</h2><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">background</span>-<span class="built_in">image</span>:url(data:<span class="built_in">image</span>/gif;<span class="built_in">base64</span>,R0lGODlhBAABAIABAMLBwfLx8SH5BAEAAAEALAAAAAAEAAEAAAICRF4AOw==);</div><div class="line"><span class="keyword">or</span></div><div class="line">&lt;img src=<span class="string">"data:image/gif;base64,R0lGODlhAwADAIABAL6+vv///yH5BAEAAAEALAAAAAADAAMAAAIDjA9WADs="</span> /&gt;</div></pre></td></tr></table></figure>
-<p>对文件base-64编码:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">font-face</span>&#123;</div><div class="line">    <span class="attribute">font-family</span>: forTest;</div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAh4 ... RFERuENEGADl7JlY=) <span class="built_in">format</span>(<span class="string">'woff'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="css-sprites"><a href="#css-sprites" class="headerlink" title="css sprites"></a>css sprites</h1><p><a href="http://www.cnblogs.com/qianlitiaotiao/p/5054231.html" target="_blank" rel="external">http://www.cnblogs.com/qianlitiaotiao/p/5054231.html</a></p>
+        <p>学习《JAVA疯狂讲义》</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://VampireKnigh.github.io/2017/06/15/图片优化/" data-id="cjdjuwsme0005z4o0vjt469wt" class="article-share-link">Share</a>
+      <a data-url="http://VampireKnigh.github.io/2018/02/12/Java基础（一）/" data-id="cjdjuwska0001z4o08yypxm5b" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
 
     </footer>
   </div>
@@ -121,20 +102,15 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/05/25/gulp和webpack的区别/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/15/图片优化/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          gulp和webpack的区别
+          图片优化
         
       </div>
     </a>
   
-  
-    <a href="/2018/02/12/Java基础（一）/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java基础（一）</div>
-    </a>
   
 </nav>
 
